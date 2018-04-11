@@ -8,7 +8,7 @@
 </head>
 <body>
 
-
+<--备注---->
 	<h1>servlet1</h1>
 	<form  action="${pageContext.request.contextPath }/servlet_servlet1" method="post">
 		<input type="text" name="name" placeholder="用户名">
