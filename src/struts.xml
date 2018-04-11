@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+
+
+	<package name="demo1" extends="struts-default" namespace="/">
+
+		<action name="test_*" class="chain.TestChain1" method="{1}">
+			<result name="chain1" type="chain">test1_chain2</result>
+		</action>
+
+		<action name="test1_*" class="chain.TestChain2" method="{1}">
+		</action>
+
+	</package>
+
+	<package name="demo2" extends="struts-default" namespace="/">
+
+		<action name="test2_*" class="redirectAction.TestRedirectAction1"	method="{1}">
+			<result name="redirectAction1" type="redirectAction">test3_redirectAction2
+			</result>
+		</action>
+
+		<action name="test3_*" class="redirectAction.TestRedirectAction2" method="{1}">
+		</action>
+
+	</package>
+
+	<package name="demo3" extends="struts-default" namespace="/">
+
+		<action name="test4_*" class="testStaticFinal.TestExtends" method="{1}">
+			<!-- 如果后台返回的是SUCCESS name属性的值可以不写 -->
+			<result>action.jsp</result>
+		</action>
+
+		<action name="test5_*" class="testStaticFinal.TestImplements" method="{1}">
+			<!-- 如果后台返回的是NONE name属性的值可以不写(不会跳转) -->
+			<result>action.jsp</result>
+			<!-- <result name="none">action.jsp</result> -->
+		</action>
+
+		<action name="test6_*" class="testStaticFinal.TestImplements" method="{1}">
+			<!-- 如果后台返回的不是静态常量 name属性的值必须要写 -->
+			<result name="test">action.jsp</result>
+		</action>
+
+	</package>
+
+	<!-- 属性驱动 -->
+	<package name="propertydriver" extends="struts-default"	namespace="/">
+		<action name="property_*" class="propertyDriver.TestPropertyDriver" method="{1}">
+		</action>
+	</package>
+
+	<!-- 模型驱动 -->
+	<package name="modeldriver" extends="struts-default" namespace="/">
+		<action name="model_*" class="modelDriver.TestModelDriver"	method="{1}">
+		</action>
+	</package>
+
+
+	<!-- 测试servlet api -->
+	<package name="servlet" extends="struts-default" namespace="/">
+		<action name="servlet_*" class="servletApi.TestServlet" method="{1}">
+			<result name="servlet3">testServlet2.jsp</result>
+		</action>
+	</package>
+
+
+</struts>
